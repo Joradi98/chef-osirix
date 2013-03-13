@@ -11,13 +11,17 @@ end
 
 Given(/^I uninstall OsiriX$/) do
   steps %Q{
-    Given I successfully run `rm -rf "#{@target}Applications/OsiriX.app`
+    Given I successfully run `rm -rf "#{@target}Applications/OsiriX.app"`
   }
 end
 
 When(/^I run my cookbook$/) do
   steps %Q{
-    When I successfully run `bundle exec chef-solo -o 'recipe[osirix]'`
+    Given a file named "solo.rb" with:
+      """
+      cookbook_path File.expand_path('../../..', Dir.pwd)
+      """
+    When I successfully run `bundle exec chef-solo -c solo.rb -o 'recipe[osirix]'`
   }
 end
 
