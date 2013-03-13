@@ -2,10 +2,31 @@ Before do
   @aruba_timeout_seconds = 150 
 end
 
-Given(/^no OsiriX files exist$/) do
+Given(/^I have an install volume$/) do
+  @target = '/'
   steps %Q{
-    Given I successfully run `rm -rf /Applications/OsiriX.app`
+    Then a directory named "#{@target}" should exist 
   }
-  Dir.glob('/tmp/Osiri*').each { |f| File.delete(f) }
 end
 
+Given(/^I uninstall OsiriX$/) do
+  steps %Q{
+    Given I successfully run `rm -rf "#{@target}Applications/OsiriX.app`
+  }
+end
+
+When(/^I run my cookbook$/) do
+  steps %Q{
+    When I successfully run `bundle exec chef-solo -o 'recipe[osirix]'`
+  }
+end
+
+Then(/^OsiriX "(.*?)" should be installed$/) do |version|
+  steps %Q{
+    Then a directory named "#{@target}Applications/OsiriX.app" should exist 
+    And the file "#{@target}Applications/OsiriX.app/Contents/Info.plist" should contain:
+      """
+      4.1.2
+      """
+  }
+end

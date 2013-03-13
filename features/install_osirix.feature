@@ -2,15 +2,11 @@ Feature: Install OsiriX
 
   In order to save a lot of time
   As a sysadmin
-  I want to automatically install OsiriX on Macs
+  I want to automatically install OsiriX via its Chef Cookbook
 
   @announce
   Scenario: Install OsiriX
-    Given no OsiriX files exist
-    Given a directory named "/Applications/OsiriX.app" should not exist 
-    When I run `install_osirix.sh`
-    Then a directory named "/Applications/OsiriX.app" should exist 
-    And the file "/Applications/OsiriX.app/Contents/Info.plist" should contain:
-      """
-      4.1.2
-      """
+    Given I have an install volume
+    And I uninstall OsiriX
+    When I run my cookbook
+    Then OsiriX "4.1.2" should be installed

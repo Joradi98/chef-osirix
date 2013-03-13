@@ -50,7 +50,13 @@ Just include `osirix` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
+
+Bootstrap your development environment with bundler, i.e.:
+
+```
+sudo gem install bundler
+bundle install --path vendor
+```
 
 e.g.
 1. Fork the repository on Github
