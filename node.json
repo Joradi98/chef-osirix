@@ -1,0 +1,15 @@
+{
+
+	"source": {
+
+		"URL": "http://www.osirix-viewer.com/OldVersions/OsiriX4.1.2.pkg-Int.zip",
+		"checksum": "ff831f8fa55fffec94e98c26af998756591b3cbb255ba15372e07807af2ac6cc"
+
+	},
+        "tmp": "/tmp",
+	"zipName": "OsiriX.zip",
+	"pkgName": "OsiriX.pkg",
+	"appPath": "/Applications/OsiriX.app",
+	"target": "/",	
+	"run_list": [ "recipe[osirix]" ]
+}
