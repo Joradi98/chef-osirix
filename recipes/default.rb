@@ -16,3 +16,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+remote_file "#{node[:tmp]}/#{node[:zipName]}" do
+	source node[:source][:URL]
+	checksum node[:source][:checksum] 
+	action :create_if_missing
+end
+
+execute "unzip -o #{node[:tmp]}/#{node[:zipName]}  -d #{node[:tmp]}" do
+	creates "#{node[:tmp]}/#{node[:pkgName]}"
+end
+
+execute "sudo installer -pkg #{node[:tmp]}/#{node[:pkgName]} -target #{node[:target]}" do
+	creates node[:appPath] 
+end
+
+
+
