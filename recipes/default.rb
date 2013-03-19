@@ -30,6 +30,6 @@ execute "unzip -o #{node[:osirix][:tmp]}/#{node[:osirix][:zip_name]}" do
 	creates "#{node[:osirix][:tmp]}/#{package}"
 end
 
-execute "sudo installer -pkg #{node[:tmp]}/#{node[:pkgName]} -target #{node[:target]}" do
-	creates node[:appPath] 
+execute "sudo installer -pkg #{node[:osirix][:tmp]}/#{package} -target /" do
+  creates '/Applications/OsiriX.app'
 end

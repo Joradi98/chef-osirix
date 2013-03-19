@@ -17,5 +17,9 @@ describe 'osirix::default' do
     )
   end
 
-  it 'installs OsiriX'
+  it 'installs OsiriX' do
+    chef_run.should execute_command('sudo installer -pkg /tmp/OsiriX.pkg -target /').with(
+      :creates => '/Applications/OsiriX.app'
+    )
+  end
 end
