@@ -16,19 +16,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-remote_file "#{node[:tmp]}/#{node[:zipName]}" do
-	source node[:source][:URL]
-	checksum node[:source][:checksum] 
-	action :create_if_missing
+
+package = 'OsiriX.pkg'
+
+remote_file "#{node[:osirix][:tmp]}/#{node[:osirix][:zip_name]}" do
+	source node[:osirix][:url]
+	checksum node[:osirix][:checksum] 
+  action :create
 end
 
-execute "unzip -o #{node[:tmp]}/#{node[:zipName]}  -d #{node[:tmp]}" do
-	creates "#{node[:tmp]}/#{node[:pkgName]}"
+execute "unzip -o #{node[:osirix][:tmp]}/#{node[:osirix][:zip_name]}" do
+  cwd node[:osirix][:tmp]
+	creates "#{node[:osirix][:tmp]}/#{package}"
 end
 
-execute "sudo installer -pkg #{node[:tmp]}/#{node[:pkgName]} -target #{node[:target]}" do
-	creates node[:appPath] 
+execute "sudo installer -pkg #{node[:osirix][:tmp]}/#{package} -target /" do
+  creates '/Applications/OsiriX.app'
 end
-
-
-
