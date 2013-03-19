@@ -10,7 +10,12 @@ describe 'osirix::default' do
     )
   end
 
-  it 'extracts OsiriX'
+  it 'extracts OsiriX' do
+    chef_run.should execute_command('unzip -o /tmp/OsiriX.zip').with(
+      :cwd => '/tmp',
+      :creates => '/tmp/OsiriX.pkg'
+    )
+  end
 
   it 'installs OsiriX'
 end
