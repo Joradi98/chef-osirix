@@ -1,5 +1,5 @@
 Before do
-  @aruba_timeout_seconds = 150 
+  @aruba_timeout_seconds = 250 
 end
 
 Given(/^I have an install volume$/) do
