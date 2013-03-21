@@ -33,20 +33,23 @@ e.g.
 
 Usage
 -----
-#### osirix::default
-TODO: Write usage instructions for each cookbook.
 
-e.g.
-Just include `osirix` in your node's `run_list`:
-
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[osirix]"
-  ]
-}
+### Requirements
+This cookbook just works with images, that don't include an eula (End User License Agreement) and that are located on a web server!
+For creating your own dmg, just execute
 ```
+sudo hdiutil create -srcfolder mysourcefolder mydestination
+``` 
+For more information read the man page of hdiutil or run 
+```
+hdiutil create -help
+```.
+
+### Installation
+Download the bootstrap-script from "https://gist.github.com/Joradi98/5212104/" and configure the location and checksum of your dmg in ~/cookbooks/chef-osirix/recipes/default.rb.
+Finally you can install OsiriX through executing this shell-script.
+
+
 
 Contributing
 ------------

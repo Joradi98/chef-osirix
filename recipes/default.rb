@@ -17,19 +17,9 @@
 # limitations under the License.
 #
 
-package = 'OsiriX.pkg'
+dmg_package "OsiriX" do
+  source "http://www.osirix-viewer.com/OsiriX5.6.dmg"                        #Here you should insert the web adress of your dmg
+  checksum "47c7b8437e2d6f74471984a19091053d8dfd147184b85c6373b0e5d435e5cd45"#Here you should inster the shasum 256 checksum of the disk image
+  action :install
+end 
 
-remote_file "#{node[:osirix][:tmp]}/#{node[:osirix][:zip_name]}" do
-	source node[:osirix][:url]
-	checksum node[:osirix][:checksum] 
-  action :create
-end
-
-execute "unzip -o #{node[:osirix][:tmp]}/#{node[:osirix][:zip_name]}" do
-  cwd node[:osirix][:tmp]
-	creates "#{node[:osirix][:tmp]}/#{package}"
-end
-
-execute "sudo installer -pkg #{node[:osirix][:tmp]}/#{package} -target /" do
-  creates '/Applications/OsiriX.app'
-end
